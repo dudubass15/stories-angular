@@ -1,0 +1,21 @@
+<main class="preview" data-aos="zoom-in-up">
+    <a href="#" class="preview__logo">Stories</a>
+    <button type="button" class="preview__previous" (click)="previous()"></button>
+    <div class="preview__layout">
+        <div class="preview__progress">
+            <ng-container *ngFor="let item of stories[0]?.items; let i = index">
+                <div #loads class="load" [ngClass]="{
+                    'active': currentSlide === i,
+                    'success': currentSlide > i && currentSlide <= stories[0]!.items!.length
+                }"></div>
+            </ng-container>
+        </div>
+        <ng-container *ngFor="let item of stories[0]?.items; let i = index;">
+            <img *ngIf="currentSlide === i" [src]="item.url" [alt]="item.name">
+        </ng-container>
+    </div>
+    <button type="button" class="preview__next" (click)="next()"></button>
+    <button type="button" class="preview__close" (click)="close()">
+        <i class="bi bi-x-lg"></i>
+    </button>
+</main>

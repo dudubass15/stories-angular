@@ -1,0 +1,18 @@
+<main class="stories">
+    <div class="stories__container">
+        <ul>
+            <ng-container *ngFor="let storie of stories; let i = index">
+                <li>
+                    <a (click)="open(i)" [id]="'storie' + i" class="stories__circle">
+                        <span class="stories__preview">
+                            <img [src]="storie.background" [alt]="storie.title">
+                        </span>
+                        <span class="stories__title">{{storie.title}}</span>
+                    </a>
+                </li>
+            </ng-container>
+        </ul>
+    </div>
+</main>
+
+<app-stories-preview [stories]="selectedStories"></app-stories-preview>
