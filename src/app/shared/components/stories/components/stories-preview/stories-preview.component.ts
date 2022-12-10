@@ -126,7 +126,7 @@ export class StoriesPreviewComponent
         this.currentSlide = 0;
     }
 
-    /** Seta o número do storie que está sendo exibido no momento */
+    /** Seta o número do storie que está sendo exibido no momento na URL */
     private setCurrentStoryNumberUrl(currentStorie: number): void {
         this.router.navigate(['/'], {
             queryParams: {
@@ -135,7 +135,7 @@ export class StoriesPreviewComponent
         });
     }
 
-    /** Reseta o número do storie que está sendo exibido no momento */
+    /** Reseta o número do storie que está sendo exibido no momento na URL */
     private resetCurrentStoryNumberUrl(): void {
         this.router.navigate(['/'], {
             queryParams: {},
