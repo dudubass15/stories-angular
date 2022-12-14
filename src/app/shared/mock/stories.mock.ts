@@ -25,7 +25,7 @@ export const StoriesMock: StoriesGroup[] = [
             {
                 id: 3,
                 name: 'Photo 04',
-                url: 'assets/stories/1.jpg',
+                url: 'assets/stories/2.jpg',
             },
         ],
     },
@@ -71,7 +71,7 @@ export const StoriesMock: StoriesGroup[] = [
             {
                 id: 3,
                 name: 'Photo 04',
-                url: 'assets/stories/1.jpg',
+                url: 'assets/stories/2.jpg',
             },
         ],
     },
@@ -99,7 +99,7 @@ export const StoriesMock: StoriesGroup[] = [
             {
                 id: 3,
                 name: 'Photo 04',
-                url: 'assets/stories/1.jpg',
+                url: 'assets/stories/2.jpg',
             },
         ],
     },

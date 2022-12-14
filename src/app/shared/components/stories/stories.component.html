@@ -15,4 +15,5 @@
     </div>
 </main>
 
-<app-stories-preview [stories]="selectedStories"></app-stories-preview>
+
+<app-stories-preview *ngIf="selectedStories.length > 0" [stories]="selectedStories"></app-stories-preview>

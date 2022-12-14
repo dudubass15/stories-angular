@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StoriesGroup } from '../../interfaces/stories-group.interface';
 import { StoriesMock } from '../../mock/stories.mock';
@@ -21,7 +21,8 @@ export class StoriesComponent implements OnInit {
 
     public constructor(
         private router: Router,
-        private activedRouter: ActivatedRoute
+        private activedRouter: ActivatedRoute,
+        private cdRef: ChangeDetectorRef
     ) {}
 
     public ngOnInit(): void {
@@ -35,19 +36,30 @@ export class StoriesComponent implements OnInit {
     }
 
     public open(id: number): void {
-        const selectedStories: StoriesGroup[] = this.getStorieData(id);
-
-        if (selectedStories.length > 0) {
-            this.selectedStories = selectedStories;
+        this.selectedStories = this.getStorieData(id);
+        if (this.selectedStories.length > 0) {
             this.router.navigate(['/'], {
                 queryParams: {
-                    storie: 0,
+                    storie: id,
+                    slide: 0,
                 },
             });
         }
     }
 
+    /** @internal */
+    /**
+     * Pega/recorta a lista de stories a partir do id passado.
+     */
     private getStorieData(id: number): StoriesGroup[] {
-        return this.stories.filter((storie: StoriesGroup) => storie.id === id);
+        return this.stories.slice(id);
+    }
+
+    /** @internal */
+    /**
+     * Retorna toda a lista de stories.
+     */
+    private getStoriesAll(): StoriesGroup[] {
+        return this.stories;
     }
 }
