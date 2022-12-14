@@ -51,7 +51,6 @@ export class StoriesPreviewComponent implements OnChanges {
     public ngOnChanges(changes: SimpleChanges): void {
         if ('stories' in changes) {
             if (changes['stories'].currentValue.length > 0) {
-                this.loading = false;
                 this.open();
             }
         }
@@ -80,7 +79,7 @@ export class StoriesPreviewComponent implements OnChanges {
 
     public autoplayer(): void {
         this.timerSetIntervalId = setInterval(() => {
-            if (this.currentSlide < this.amoutOfSlide) {
+            if (this.currentStorie <= this.amoutOfStories) {
                 this.next();
             } else {
                 clearInterval(this.timerSetIntervalId);
@@ -174,11 +173,12 @@ export class StoriesPreviewComponent implements OnChanges {
         this.currentSlide = 0;
         this.currentStorie = 0;
         this.stories = [];
+        this.loading = false;
     }
 
     /** Seta o número do storie que está sendo exibido no momento na URL */
     private setCurrentSlideNumberUrl(currentSlide: number): void {
-        this.router.navigate(['/'], {
+        this.router.navigate([this.router.url.split('?')[0]], {
             queryParams: {
                 storie: this.currentStorie,
                 slide: currentSlide,
@@ -188,7 +188,7 @@ export class StoriesPreviewComponent implements OnChanges {
 
     /** Seta o número do storie que está sendo exibido no momento na URL */
     private setCurrentStoreNumberUrl(currentStore: number): void {
-        this.router.navigate(['/'], {
+        this.router.navigate([this.router.url.split('?')[0]], {
             queryParams: {
                 storie: currentStore,
                 slide: this.currentSlide,
@@ -198,7 +198,7 @@ export class StoriesPreviewComponent implements OnChanges {
 
     /** Reseta o número do storie que está sendo exibido no momento na URL */
     private resetCurrentStoryNumberUrl(): void {
-        this.router.navigate(['/'], {
+        this.router.navigate([this.router.url.split('?')[0]], {
             queryParams: {},
         });
     }

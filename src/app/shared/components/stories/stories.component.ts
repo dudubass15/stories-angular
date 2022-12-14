@@ -38,11 +38,11 @@ export class StoriesComponent implements OnInit {
     public open(id: number): void {
         this.selectedStories = this.getStorieData(id);
         if (this.selectedStories.length > 0) {
-            this.router.navigate(['/'], {
+            this.router.navigate([this.router.url.split('?')[0]], {
                 queryParams: {
                     storie: id,
                     slide: 0,
-                },
+                }
             });
         }
     }

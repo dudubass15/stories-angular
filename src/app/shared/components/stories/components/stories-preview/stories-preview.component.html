@@ -3,7 +3,7 @@
     <button type="button" class="preview__previous" (click)="previous()"></button>
     <div class="preview__wrapper">
         <ng-container *ngFor="let storie of stories; let i = index">
-            <div *ngIf="currentStorie === i" id="storie{{i}}" class="preview__layout" [ngClass]="'storie'+i">
+            <div *ngIf="currentStorie === i" id="storie{{i}}" class="preview__layout" [ngClass]="{'loading': true}">
                 <div class="preview__progress">
                     <ng-container *ngFor="let item of storie.items; let is = index">
                         <div #loads class="load" [ngClass]="{
