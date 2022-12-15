@@ -50,17 +50,18 @@
 
     &__preview {
         display: block;
-        width: 100px;
-        height: 100px;
+        width: 105px;
+        height: 105px;
         border-radius: 50%;
-        outline: 2px solid $stories_primary;
-        outline-offset: 4px;
-        overflow: hidden;
 
         img {
             width: 100%;
+            height: 100%;
             object-fit: cover;
-            object-position: center;
+            object-position: top;
+            box-shadow: 0rem 0rem 0rem 0.1rem orange;
+            padding: 0.2rem;
+            border-radius: 50%;
         }
     }
 

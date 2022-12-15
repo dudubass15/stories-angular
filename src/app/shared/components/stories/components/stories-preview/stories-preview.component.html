@@ -12,6 +12,14 @@
                         }"></div>
                     </ng-container>
                 </div>
+                <div class="preview__profile">
+                    <div class="row">
+                        <div class="circle">
+                            <img src="assets/stories/familia/2.jpg" alt="User">
+                        </div>
+                        <h3 class="name">Carlos Eduardo <span>2min</span></h3>
+                    </div>
+                </div>
                 <ng-container *ngFor="let img of storie.items; let im = index;">
                     <img *ngIf="currentSlide === im" [src]="img.url" [alt]="img.name">
                 </ng-container>
