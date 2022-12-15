@@ -8,6 +8,7 @@ import {
     SimpleChanges,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { StoriesGroup } from 'src/app/shared/interfaces/stories-group.interface';
 
 @Component({
@@ -40,6 +41,9 @@ export class StoriesPreviewComponent implements OnChanges {
 
     /** Guarda os ids gerados pelo setinterval */
     public timerSetIntervalId: any;
+
+    /** Interface Angular responsável por se desinscrever de um observable */
+    public subscription: Subscription;
 
     public constructor(
         private render: Renderer2,
@@ -75,36 +79,6 @@ export class StoriesPreviewComponent implements OnChanges {
         this.stop(this.timerSetIntervalId);
         this.resetAllProps();
         this.resetCurrentStoryNumberUrl();
-    }
-
-    public autoplayer(): void {
-        this.timerSetIntervalId = setInterval(() => {
-            if (this.currentStorie <= this.amoutOfStories) {
-                this.next();
-            } else {
-                clearInterval(this.timerSetIntervalId);
-                this.close();
-            }
-        }, this.duration);
-    }
-
-    public observableIdStorie(): void {
-        let i = 0;
-        this.activeteRoute.queryParams.subscribe((param: any) => {
-            if (param.storie !== i) {
-                i = param.storie;
-                // this.scrollItemPreview(param.storie);
-            }
-        });
-    }
-
-    public reboot(timerout: any): void {
-        clearInterval(timerout);
-        this.autoplayer();
-    }
-
-    public stop(timerout: any): void {
-        clearInterval(timerout);
     }
 
     public next(): void {
@@ -149,6 +123,48 @@ export class StoriesPreviewComponent implements OnChanges {
         } else {
             this.close();
         }
+    }
+
+    /** @internal */
+    /** Método responsável por acionar o player automático do Storie */
+    private autoplayer(): void {
+        this.timerSetIntervalId = setInterval(() => {
+            if (this.currentStorie <= this.amoutOfStories) {
+                this.next();
+            } else {
+                clearInterval(this.timerSetIntervalId);
+                this.close();
+            }
+        }, this.duration);
+    }
+
+    /** @internal */
+    /** Método responsável por ouvir os parâmetros passados via URL e
+     * seta seus valores recebidos para serem utilizados pela execução dos Stories.
+     * */
+    private observableIdStorie(): void {
+        this.subscription = this.activeteRoute.queryParams.subscribe((params: any) => {
+            if (params.storie && params.slide) {
+                this.currentStorie = parseInt(params.storie);
+                this.currentSlide = parseInt(params.slide);
+                setTimeout(() => {
+                    this.subscription.unsubscribe();
+                }, 300);
+            }
+        });
+    }
+
+    /** @internal */
+    /** Método responsável por reiniciar o autoplayer, iniciando o mesmo em outra instância */
+    private reboot(timerout: any): void {
+        clearInterval(timerout);
+        this.autoplayer();
+    }
+
+    /** @internal */
+    /** Método responsável por parar o autoplayer */
+    private stop(timerout: any): void {
+        clearInterval(timerout);
     }
 
     /** @internal */

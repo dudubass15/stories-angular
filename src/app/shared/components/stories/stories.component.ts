@@ -1,5 +1,6 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { StoriesGroup } from '../../interfaces/stories-group.interface';
 import { StoriesMock } from '../../mock/stories.mock';
 
@@ -19,29 +20,35 @@ export class StoriesComponent implements OnInit {
      * */
     public selectedStories: StoriesGroup[] = [];
 
+    /** Interface Angular responsável por se desinscrever de um observable */
+    public subscription: Subscription;
+
     public constructor(
         private router: Router,
-        private activedRouter: ActivatedRoute,
-        private cdRef: ChangeDetectorRef
+        private activedRouter: ActivatedRoute
     ) {}
 
     public ngOnInit(): void {
-        // TODO: Verifica possibilidade de pegar os stories pelo ID e abrir em determinado storie.
-        // this.activedRouter.queryParams.subscribe((params: any) => {
-        //     if (params.storie) {
-        //         const id: number = parseInt(params.storie);
-        //         this.open(id);
-        //     }
-        // });
+        this.subscription = this.activedRouter.queryParams.subscribe((params: any) => {
+            if (params.storie) {
+                const storieID: number = parseInt(params.storie);
+                const slideID: number = parseInt(params.slide);
+                this.open(storieID, slideID);
+
+                setTimeout(() => {
+                    this.subscription.unsubscribe();
+                }, 300);
+            }
+        });
     }
 
-    public open(id: number): void {
-        this.selectedStories = this.getStorieData(id);
+    public open(storieID: number, slideID?: number): void {
+        this.selectedStories = this.getStoriesAll();
         if (this.selectedStories.length > 0) {
             this.router.navigate([this.router.url.split('?')[0]], {
                 queryParams: {
-                    storie: id,
-                    slide: 0,
+                    storie: storieID,
+                    slide: !!slideID ? slideID : 0,
                 }
             });
         }
@@ -49,17 +56,9 @@ export class StoriesComponent implements OnInit {
 
     /** @internal */
     /**
-     * Pega/recorta a lista de stories a partir do id passado.
-     */
-    private getStorieData(id: number): StoriesGroup[] {
-        return this.stories.slice(id);
-    }
-
-    /** @internal */
-    /**
-     * Retorna toda a lista de stories.
+     * Retorna uma cópia de toda a lista de stories.
      */
     private getStoriesAll(): StoriesGroup[] {
-        return this.stories;
+        return Array.from(this.stories);
     }
 }
