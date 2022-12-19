@@ -1,253 +1,65 @@
 .preview {
-    $background: #000000;
-    $background_previous: transparent;
-    $background_next: transparent;
-    $background_layout: rgba(25, 25, 25, 0.152);
-    $color_logo: #FFF;
-    $color_close: #FFF;
-
-    display: none;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: $background;
-
-    &__previous {
-        width: 100%;
-        height: 100%;
-        background-color: $background_previous;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        z-index: 10;
-    }
-
     &__wrapper {
-        display: inline-flex;
-        flex-direction: row;
-        z-index: 0;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        width: 100%;
-        min-width: 100%;
-        height: 100%;
-        background-color: transparent;
-        overflow: scroll;
-    }
-
-    &__layout {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        min-width: 100%;
-        height: 100%;
-        background-color: transparent;
-        position: relative;
-
-        img {
-            width: 100%;
-            min-width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            z-index: 1;
-        }
-    }
-
-    &__next {
-        width: 100%;
-        height: 100%;
-        background-color: $background_next;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        z-index: 10;
-    }
-
-    &__progress {
-        display: flex;
-        flex-direction: row;
-        column-gap: 8px;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        padding: 40px 1rem;
-        background-color: transparent;
-        z-index: 10;
-        position: absolute;
-        top: 0;
-
-        .load {
-            width: 100%;
-            height: 4px;
-            border-radius: 4px;
-            background-color: rgba(255, 255, 255, 0.563);
-            position: relative;
-        }
-
-        .success::before {
-            content: '';
-            width: 100%;
-            height: 100%;
-            background-color: #FFF;
-            border-radius: 4px;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
-        .active::before {
-            content: '';
-            width: 80%;
-            height: 100%;
-            background-color: #FFF;
-            border-radius: 4px;
-            position: absolute;
-            top: 0;
-            left: 0;
-            animation: progressAnimate 5800ms linear forwards;
-            transition: width ease 5800ms;
-        }
+        min-width: 500px;
+        max-width: 500px;
     }
 
     &__profile {
-        width: 100%;
-        padding: 2px 1rem;
-        z-index: 10;
-        position: absolute;
-        top: 55px;
+        top: 60px;
+        z-index: 30;
 
         .row {
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            column-gap: 10px;
-            align-items: center;
+            column-gap: 0.8rem;
 
             .circle {
-                width: 48px;
-                height: 48px;
-                border-radius: 50%;
-                background-color: rgba(255, 255, 255, 0.186);
-
-                img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    object-position: center;
-                    position: initial;
-                    box-shadow: 0rem 0rem 0rem 0.1rem orange;
-                    object-fit: cover;
-                    padding: 0.1rem;
-                    border-radius: 50%;
-                }
+                width: 46px;
+                height: 46px;
             }
 
             .name {
-                color: $color_logo;
-                font-size: 16px;
                 display: flex;
                 flex-direction: column;
-
-                span {
-                    font-size: 0.8rem;
-                    font-weight: 100;
-                }
+                font-size: 15px;
+                row-gap: 0.1rem;
             }
         }
-    }
 
-    &__logo {
-        display: none;
-        color: $color_logo;
-        text-decoration: none;
-        font-weight: 400;
-        font-size: 24px;
-        position: absolute;
-        top: 30px;
-        left: 15%;
+        .actions {
+            .btn-share {
+                i {
+                    font-size: 20px;
+                    color: #FFF;
+                }
+            }
+
+            .btn-close {
+                display: none;
+            }
+        }
     }
 
     &__close {
-        cursor: pointer;
-        background-color: transparent;
-        padding: 10px;
-        border: none;
-        outline: none;
-        border-radius: 50%;
-        position: absolute;
-        top: 62px;
-        right: 6%;
-        z-index: 10;
-        text-shadow: 0px 0px 12px #0000007a;
+        display: block;
+    }
 
-        i {
-            font-size: 22px;
-            color: $color_close;
+    &__footer {
+        .link {
+            max-width: 400px;
+            font-size: 18px;
+            font-weight: 400;
+            transform: scale(0.9);
+            transition: all ease 0.6s;
+            background-color: orange;
+
+            &:hover {
+                background-color: orange;
+                transform: scale(1);
+            }
         }
     }
 }
 
-.open {
-    display: flex !important;
-}
-
-.loading {
-    z-index: 30;
-
-    &::after {
-        content: '';
-        width: 76px;
-        height: 76px;
-        border-radius: 50%;
-        background-color: #000000;
-        position: absolute;
-    }
-
-    &::before {
-        content: '';
-        width: 82px;
-        height: 82px;
-        border-radius: 50%;
-        background: conic-gradient(from 45deg, #FFF, #000000);
-        animation: loadInfinity linear 0.9s forwards infinite;
-        transition: all ease 0.9s;
-    }
-}
-
-@keyframes progressAnimate {
-    0% {
-        width: 0%;
-    }
-    100% {
-        width: 100%;
-    }
-}
-
-@keyframes loadInfinity {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 320px) {
     .preview {
         $background: #000000;
         $background_previous: transparent;
@@ -259,6 +71,7 @@
         display: none;
         flex-direction: row;
         justify-content: space-between;
+        align-items: center;
         width: 100vw;
         height: 100vh;
         position: fixed;
@@ -275,175 +88,40 @@
             border: none;
             outline: none;
             cursor: pointer;
+            z-index: 10;
+            max-height: 70vh;
         }
 
         &__wrapper {
-            position: relative;
-            width: 100%;
-            min-width: 600px;
-            max-width: 600px;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        &__layout {
-            width: 100%;
-            height: 100%;
-            background-color: $background_layout;
-
-            img {
-                width: 100%;
-                min-width: 100%;
-                object-fit: cover;
-                object-position: center;
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                left: 0;
-                z-index: 1;
-            }
-        }
-
-        &__next {
-            width: 100%;
-            height: 100%;
-            background-color: $background_next;
-            border: none;
-            outline: none;
-            cursor: pointer;
-        }
-
-        &__progress {
-            display: flex;
+            display: inline-flex;
             flex-direction: row;
-            column-gap: 8px;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            padding: 40px 1rem;
-            background-color: transparent;
-            z-index: 10;
-            position: absolute;
+            z-index: 0;
+            position: fixed;
             top: 0;
-
-            .load {
-                width: 100%;
-                height: 4px;
-                border-radius: 4px;
-                background-color: rgba(255, 255, 255, 0.563);
-                position: relative;
-            }
-
-            .success::before {
-                content: '';
-                width: 100%;
-                height: 100%;
-                background-color: #FFF;
-                border-radius: 4px;
-                position: absolute;
-                top: 0;
-                left: 0;
-            }
-
-            .active::before {
-                content: '';
-                width: 80%;
-                height: 100%;
-                background-color: #FFF;
-                border-radius: 4px;
-                position: absolute;
-                top: 0;
-                left: 0;
-                animation: progressAnimate 5800ms linear forwards;
-                transition: width ease 5800ms;
-            }
-        }
-
-        &__logo {
-            display: block;
-            color: $color_logo;
-            text-decoration: none;
-            font-weight: 400;
-            font-size: 24px;
-            position: absolute;
-            top: 30px;
-            left: 20%;
-        }
-
-        &__close {
-            cursor: pointer;
-            background-color: transparent;
-            padding: 10px;
-            border: none;
-            outline: none;
-            border-radius: 50%;
-            position: absolute;
-            top: 30px;
-            right: 25%;
-
-            i {
-                font-size: 22px;
-                color: $color_close;
-            }
-        }
-    }
-
-    .open {
-        display: flex !important;
-    }
-
-    @keyframes progressAnimate {
-        0% {
-            width: 0%;
-        }
-        100% {
+            left: 0;
+            right: 0;
+            bottom: 0;
             width: 100%;
-        }
-    }
-}
-
-@media only screen and (min-width: 1100px) {
-    .preview {
-        $background: #000000;
-        $background_previous: transparent;
-        $background_next: transparent;
-        $background_layout: rgba(25, 25, 25, 0.152);
-        $color_logo: #FFF;
-        $color_close: #FFF;
-
-        display: none;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 100vw;
-        height: 100vh;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: $background;
-
-        &__previous {
-            width: 100%;
+            min-width: 100%;
             height: 100%;
-            background-color: $background_previous;
-            border: none;
-            outline: none;
-            cursor: pointer;
+            background-color: transparent;
+            overflow: scroll;
         }
 
         &__layout {
-            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             width: 100%;
-            min-width: 600px;
-            max-width: 600px;
+            min-width: 100%;
             height: 100%;
-            background-color: $background_layout;
-            overflow: hidden;
+            background-color: transparent;
+            position: fixed;
 
             img {
                 width: 100%;
                 min-width: 100%;
+                height: 100%;
                 object-fit: cover;
                 object-position: center;
                 position: absolute;
@@ -461,6 +139,8 @@
             border: none;
             outline: none;
             cursor: pointer;
+            z-index: 10;
+            max-height: 70vh;
         }
 
         &__progress {
@@ -470,7 +150,7 @@
             align-items: center;
             justify-content: space-between;
             width: 100%;
-            padding: 40px 1rem;
+            padding: 40px 1rem 0rem;
             background-color: transparent;
             z-index: 10;
             position: absolute;
@@ -510,20 +190,46 @@
         }
 
         &__profile {
-            padding: 5px 1rem;
-            top: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 2px 1rem;
+            position: absolute;
+            top: 55px;
+            z-index: 30;
 
             .row {
-                column-gap: 15px;
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                column-gap: 10px;
+                align-items: center;
+
                 .circle {
-                    width: 52px;
-                    height: 52px;
+                    width: 48px;
+                    height: 48px;
+                    border-radius: 50%;
+                    background-color: rgba(255, 255, 255, 0.186);
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        object-position: center;
+                        position: initial;
+                        box-shadow: 0rem 0rem 0rem 0.1rem orange;
+                        object-fit: cover;
+                        padding: 0.1rem;
+                        border-radius: 50%;
+                    }
                 }
 
                 .name {
+                    color: $color_logo;
+                    font-size: 16px;
                     display: flex;
                     flex-direction: column;
-                    font-size: 17px;
 
                     span {
                         font-size: 0.8rem;
@@ -531,20 +237,56 @@
                     }
                 }
             }
+
+            .actions {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                width: auto;
+                column-gap: 1.6rem;
+
+                .btn-share {
+                    display: block;
+                    border: none;
+                    background-color: transparent;
+                    outline: none;
+                    cursor: pointer;
+
+                    i {
+                        font-size: 18px;
+                        color: #FFF;
+                    }
+                }
+
+                .btn-close {
+                    display: flex;
+                    border: none;
+                    background-color: transparent;
+                    outline: none;
+                    cursor: pointer;
+                    z-index: 50;
+
+                    i {
+                        font-size: 20px;
+                        color: #FFF;
+                    }
+                }
+            }
         }
 
         &__logo {
-            display: block;
+            display: none;
             color: $color_logo;
             text-decoration: none;
             font-weight: 400;
             font-size: 24px;
             position: absolute;
             top: 30px;
-            left: 2%;
+            left: 15%;
         }
 
         &__close {
+            display: none;
             cursor: pointer;
             background-color: transparent;
             padding: 10px;
@@ -552,12 +294,43 @@
             outline: none;
             border-radius: 50%;
             position: absolute;
-            top: 30px;
-            right: 15%;
+            top: 54px;
+            right: 6%;
+            z-index: 10;
+            text-shadow: 0px 0px 12px #0000007a;
 
             i {
                 font-size: 22px;
                 color: $color_close;
+            }
+        }
+
+        &__footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: auto;
+            z-index: 10;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 1rem;
+
+            .link {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-decoration: none;
+                width: 100%;
+                min-height: 40px;
+                color: #000;
+                background-color: rgb(213, 213, 213);
+                padding: 1rem;
+                border-radius: 6px;
+                cursor: pointer;
+                box-shadow: 0px 0px 1px 1px #00000003;
             }
         }
     }
@@ -566,12 +339,139 @@
         display: flex !important;
     }
 
+    .loading {
+        z-index: 30;
+
+        &::after {
+            content: '';
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            background-color: #000000;
+            position: absolute;
+        }
+
+        &::before {
+            content: '';
+            width: 82px;
+            height: 82px;
+            border-radius: 50%;
+            background: conic-gradient(from 45deg, #FFF, #000000);
+            animation: loadInfinity linear 0.9s forwards infinite;
+            transition: all ease 0.9s;
+        }
+    }
+
     @keyframes progressAnimate {
         0% {
             width: 0%;
         }
+
         100% {
             width: 100%;
+        }
+    }
+
+    @keyframes loadInfinity {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .preview {
+        $background: #000000;
+        $background_previous: transparent;
+        $background_next: transparent;
+        $background_layout: rgba(25, 25, 25, 0.152);
+        $color_logo: #FFF;
+        $color_close: #FFF;
+
+        display: none;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: $background;
+
+        &__previous {
+            width: 100%;
+            height: 100%;
+            background-color: $background_previous;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            max-height: 100vh;
+        }
+
+        &__next {
+            max-height: 100vh;
+        }
+
+        &__wrapper {
+            position: relative;
+            width: 100%;
+            min-width: 500px;
+            max-width: 500px;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        &__layout {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            min-width: 100%;
+            height: 100%;
+            background-color: transparent;
+            position: relative;
+
+            img {
+                width: 100%;
+                min-width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                z-index: 1;
+            }
+        }
+
+        &__profile {
+            z-index: 30;
+
+            .actions {
+                .btn-share {
+                    i {
+                        font-size: 20px;
+                        color: #FFF;
+                    }
+                }
+
+                .btn-close {
+                    display: none;
+                }
+            }
+        }
+
+        &__close {
+            display: block;
+            top: 30px;
+            right: 30px;
         }
     }
 }

@@ -1,15 +1,26 @@
+import { DOCUMENT } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
+    Inject,
+    InjectionToken,
     Input,
     OnChanges,
     Renderer2,
     SimpleChanges,
+    inject,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { StoriesGroup } from 'src/app/shared/interfaces/stories-group.interface';
+
+export const NAVIGATOR = new InjectionToken<Navigator>(
+  'An abstraction over window.navigator object',
+  {
+    factory: () => inject(Window).navigator,
+  },
+);
 
 @Component({
     selector: 'app-stories-preview',
@@ -18,11 +29,17 @@ import { StoriesGroup } from 'src/app/shared/interfaces/stories-group.interface'
     changeDetection: ChangeDetectionStrategy.Default,
 })
 export class StoriesPreviewComponent implements OnChanges {
+    /** Array contendo os dados dos stories */
     @Input()
     public stories: StoriesGroup[] = [];
 
+    /** Duração do loading de cada stories */
     @Input()
     public duration: number = 5800;
+
+    /** Habilita ou desabilita o autoplay dos stories */
+    @Input()
+    public autoplay: boolean = false;
 
     /** Habilita o loading antes de carregar o conteúdo do stories */
     public loading: boolean = true;
@@ -68,7 +85,10 @@ export class StoriesPreviewComponent implements OnChanges {
         this.getAmountOfStories();
         this.getAmountOfSlide();
         this.observableIdStorie();
-        this.autoplayer();
+
+        if (this.autoplay) {
+            this.autoplayer();
+        }
     }
 
     public close(): void {
@@ -79,6 +99,22 @@ export class StoriesPreviewComponent implements OnChanges {
         this.stop(this.timerSetIntervalId);
         this.resetAllProps();
         this.resetCurrentStoryNumberUrl();
+    }
+
+    public async share(): Promise<any> {
+        const navigator = window.navigator as any;
+        const url = window.location.protocol + '//' + window.location.host + this.router.url;
+        const data = {
+            title: 'Compartilhamento do Storie',
+            text: 'Link',
+            url: url
+        };
+
+        try {
+            await navigator.share(data);
+        } catch (error) {
+            alert(`Error: ${error}`);
+        }
     }
 
     public next(): void {
@@ -158,7 +194,10 @@ export class StoriesPreviewComponent implements OnChanges {
     /** Método responsável por reiniciar o autoplayer, iniciando o mesmo em outra instância */
     private reboot(timerout: any): void {
         clearInterval(timerout);
-        this.autoplayer();
+
+        if (this.autoplay) {
+            this.autoplayer();
+        }
     }
 
     /** @internal */

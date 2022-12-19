@@ -19,15 +19,26 @@
                         </div>
                         <h3 class="name">Carlos Eduardo <span>2min</span></h3>
                     </div>
+                    <div class="actions">
+                        <button class="btn-share" title="Compartilhar" (click)="share()">
+                            <i class="bi bi-share-fill"></i>
+                        </button>
+                        <button class="btn-close" (click)="close()" title="Fechar">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    </div>
                 </div>
                 <ng-container *ngFor="let img of storie.items; let im = index;">
                     <img *ngIf="currentSlide === im" [src]="img.url" [alt]="img.name">
                 </ng-container>
+                <div class="preview__footer">
+                    <a href="#" class="link">Saiba mais</a>
+                </div>
             </div>
         </ng-container>
     </div>
     <button type="button" class="preview__next" (click)="next()"></button>
-    <button type="button" class="preview__close" (click)="close()">
+    <button type="button" class="preview__close" (click)="close()" title="Fechar">
         <i class="bi bi-x-lg"></i>
     </button>
 </main>

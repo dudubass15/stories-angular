@@ -34,7 +34,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        row-gap: 1.5rem;
+        row-gap: 1rem;
         cursor: pointer;
         width: 100px;
         min-height: 100px;
@@ -68,6 +68,7 @@
     &__title {
         font-weight: 600;
         font-size: 18px;
+        font-weight: 300;
         color: $stories_primary;
     }
 }
@@ -96,6 +97,10 @@
 
         &__container {
             width: auto;
+
+            ul {
+                column-gap: 0rem;
+            }
         }
 
         &__preview {
