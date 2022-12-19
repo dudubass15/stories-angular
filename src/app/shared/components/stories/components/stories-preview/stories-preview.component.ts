@@ -106,14 +106,14 @@ export class StoriesPreviewComponent implements OnChanges {
         const url = window.location.protocol + '//' + window.location.host + this.router.url;
         const data = {
             title: 'Compartilhamento do Storie',
-            text: 'Link',
+            text: 'Compartilhamento do Storie',
             url: url
         };
 
         try {
             await navigator.share(data);
         } catch (error) {
-            alert(`Error: ${error}`);
+            console.log(`Error: ${error}`);
         }
     }
 
