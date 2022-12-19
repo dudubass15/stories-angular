@@ -39,7 +39,7 @@ export class StoriesPreviewComponent implements OnChanges {
 
     /** Habilita ou desabilita o autoplay dos stories */
     @Input()
-    public autoplay: boolean = false;
+    public autoplay: boolean = true;
 
     /** Habilita o loading antes de carregar o conteúdo do stories */
     public loading: boolean = true;
