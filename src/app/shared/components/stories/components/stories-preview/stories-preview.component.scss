@@ -104,6 +104,8 @@
             position: fixed;
             top: 110px;
             left: 0;
+            -webkit-appearance: none;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
         }
 
         &__wrapper {
@@ -158,6 +160,8 @@
             position: fixed;
             top: 110px;
             right: 0;
+            -webkit-appearance: none;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
         }
 
         &__progress {
@@ -213,7 +217,7 @@
             width: 100%;
             padding: 2px 1rem;
             position: absolute;
-            top: 55px;
+            top: 60px;
             z-index: 30;
 
             .row {
@@ -224,8 +228,8 @@
                 align-items: center;
 
                 .circle {
-                    width: 48px;
-                    height: 48px;
+                    width: 42px;
+                    height: 42px;
                     border-radius: 50%;
                     background-color: rgba(255, 255, 255, 0.186);
 
@@ -244,7 +248,7 @@
 
                 .name {
                     color: $color_logo;
-                    font-size: 16px;
+                    font-size: 14px;
                     display: flex;
                     flex-direction: column;
 
