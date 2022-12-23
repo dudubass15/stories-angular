@@ -31,11 +31,14 @@
                 <ng-container *ngFor="let img of storie.items; let im = index;">
                     <img *ngIf="currentSlide === im" [src]="img.url" [alt]="img.name">
                 </ng-container>
-                <div class="preview__footer">
-                    <a href="#" class="link">Saiba mais</a>
-                </div>
             </div>
         </ng-container>
+    </div>
+    <div *ngIf="getLinkFooter" class="preview__footer">
+        <a (click)="goToKnowMore(getLinkFooter.url)" class="link">
+            {{getLinkFooter.text}}
+            <i class="bi bi-chevron-right"></i>
+        </a>
     </div>
     <button type="button" class="preview__next" (click)="next()"></button>
     <button type="button" class="preview__close" (click)="close()" title="Fechar">

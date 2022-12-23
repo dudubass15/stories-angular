@@ -14,6 +14,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { StoriesGroup } from 'src/app/shared/interfaces/stories-group.interface';
+import { StoriesLink } from 'src/app/shared/interfaces/stories-link.interface';
 
 export const NAVIGATOR = new InjectionToken<Navigator>(
   'An abstraction over window.navigator object',
@@ -62,6 +63,11 @@ export class StoriesPreviewComponent implements OnChanges {
     /** Interface Angular responsável por se desinscrever de um observable */
     public subscription: Subscription;
 
+    /** Verifica se item possui link, caso possua, retorna o mesmo */
+    public get getLinkFooter(): StoriesLink | undefined {
+        return this.stories[this.currentStorie]?.items[this.currentSlide].link;
+    }
+
     public constructor(
         private render: Renderer2,
         private elRef: ElementRef,
@@ -106,7 +112,7 @@ export class StoriesPreviewComponent implements OnChanges {
         const url = window.location.protocol + '//' + window.location.host + this.router.url;
         const data = {
             title: 'Compartilhamento do Storie',
-            text: 'Compartilhamento do Storie',
+            text: 'Envie o link para alguém que você queira que visualize.',
             url: url
         };
 
@@ -114,6 +120,12 @@ export class StoriesPreviewComponent implements OnChanges {
             await navigator.share(data);
         } catch (error) {
             console.log(`Error: ${error}`);
+        }
+    }
+
+    public goToKnowMore(url: string): void {
+        if (url) {
+            window.open(url, '_blank');
         }
     }
 

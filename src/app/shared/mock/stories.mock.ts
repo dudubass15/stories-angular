@@ -10,12 +10,16 @@ export const StoriesMock: StoriesGroup[] = [
             {
                 id: 0,
                 name: 'Photo 01',
-                url: 'assets/stories/familia/1.jpg',
+                url: 'assets/stories/familia/1.jpg'
             },
             {
                 id: 1,
                 name: 'Photo 02',
                 url: 'assets/stories/familia/2.jpg',
+                link: {
+                    text: 'Saiba mais',
+                    url: 'https://stories.carloseduardo.dev'
+                }
             }
         ],
     },
@@ -29,6 +33,10 @@ export const StoriesMock: StoriesGroup[] = [
                 id: 0,
                 name: 'Photo 01',
                 url: 'assets/stories/trabalho/1.jpg',
+                link: {
+                    text: 'Ir para o Google',
+                    url: 'https://google.com.br'
+                }
             },
             {
                 id: 1,
@@ -39,6 +47,10 @@ export const StoriesMock: StoriesGroup[] = [
                 id: 2,
                 name: 'Photo 03',
                 url: 'assets/stories/trabalho/3.jpg',
+                link: {
+                    text: 'Ir para a Amazon',
+                    url: 'https://www.amazon.com.br/'
+                }
             },
         ],
     },
