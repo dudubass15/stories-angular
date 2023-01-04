@@ -1,46 +1,17 @@
-<main class="preview" data-aos="zoom-in-up">
-    <a href="#" class="preview__logo">Meus stories</a>
-    <button type="button" class="preview__previous" (click)="previous()"></button>
-    <div class="preview__wrapper">
-        <ng-container *ngFor="let storie of stories; let i = index">
-            <div *ngIf="currentStorie === i" id="storie{{i}}" class="preview__layout" [ngClass]="{'loading': true}">
-                <div class="preview__progress">
-                    <ng-container *ngFor="let item of storie.items; let is = index">
-                        <div #loads class="load" [ngClass]="{
-                            'active': currentSlide == is,
-                            'success': currentSlide > is && currentSlide <= storie.items!.length
-                        }"></div>
-                    </ng-container>
-                </div>
-                <div class="preview__profile">
-                    <div class="row">
-                        <div class="circle">
-                            <img src="assets/stories/familia/2.jpg" alt="User">
-                        </div>
-                        <h3 class="name">Carlos Eduardo <span>2min</span></h3>
-                    </div>
-                    <div class="actions">
-                        <button class="btn-share" title="Compartilhar" (click)="share()">
-                            <i class="bi bi-share-fill"></i>
-                        </button>
-                        <button class="btn-close" (click)="close()" title="Fechar">
-                            <i class="bi bi-x-lg"></i>
-                        </button>
-                    </div>
-                </div>
-                <ng-container *ngFor="let img of storie.items; let im = index;">
-                    <img *ngIf="currentSlide === im" [src]="img.url" [alt]="img.name">
-                </ng-container>
-            </div>
-        </ng-container>
+<main class="preview open" data-aos="zoom-in-up">
+    <div class="preview__container">
+        <button class="btn previous" (click)="previous()"></button>
+        <div class="player">
+            <app-stories-player
+                *ngFor="let storie of stories; let i = index"
+                [storie]="storie"
+                [isActived]="this.currentStorie === i"
+                [wasSeen]="this.currentSlide > i && this.currentSlide <= storie.items!.length"
+                [currentSlide]="this.currentSlide"
+            ></app-stories-player>
+        </div>
+        <button class="btn next" (click)="next()"></button>
     </div>
-    <div *ngIf="getLinkFooter" class="preview__footer">
-        <a (click)="goToKnowMore(getLinkFooter.url)" class="link">
-            {{getLinkFooter.text}}
-            <i class="bi bi-chevron-right"></i>
-        </a>
-    </div>
-    <button type="button" class="preview__next" (click)="next()"></button>
     <button type="button" class="preview__close" (click)="close()" title="Fechar">
         <i class="bi bi-x-lg"></i>
     </button>

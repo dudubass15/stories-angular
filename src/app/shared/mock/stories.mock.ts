@@ -4,7 +4,7 @@ export const StoriesMock: StoriesGroup[] = [
     {
         id: 0,
         title: 'Família',
-        background: 'assets/stories/familia/capa.jpg',
+        thumbnail: 'assets/stories/familia/capa.jpg',
         date: new Date(),
         items: [
             {
@@ -26,7 +26,7 @@ export const StoriesMock: StoriesGroup[] = [
     {
         id: 1,
         title: 'Trabalho',
-        background: 'assets/stories/trabalho/capa.jpg',
+        thumbnail: 'assets/stories/trabalho/capa.jpg',
         date: new Date(),
         items: [
             {
@@ -57,7 +57,7 @@ export const StoriesMock: StoriesGroup[] = [
     {
         id: 2,
         title: 'Viagens',
-        background: 'assets/stories/viagens/1.jpg',
+        thumbnail: 'assets/stories/viagens/1.jpg',
         date: new Date(),
         items: [
             {

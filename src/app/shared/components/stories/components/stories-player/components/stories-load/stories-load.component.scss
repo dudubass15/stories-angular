@@ -1,0 +1,45 @@
+:host {
+    display: block;
+    font-size: 62.5%;
+
+    .loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        min-width: 100%;
+        height: 100%;
+        background-color: transparent;
+        position: absolute;
+        z-index: 30;
+
+        &::after {
+            content: '';
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            background-color: #000000;
+            position: absolute;
+        }
+
+        &::before {
+            content: '';
+            width: 82px;
+            height: 82px;
+            border-radius: 50%;
+            background: conic-gradient(from 45deg, #FFF, #000000);
+            animation: loadInfinity linear 0.9s forwards infinite;
+            transition: all ease 0.9s;
+        }
+    }
+}
+
+@keyframes loadInfinity {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

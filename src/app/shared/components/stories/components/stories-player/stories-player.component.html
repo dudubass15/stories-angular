@@ -1,0 +1,16 @@
+<div class="player" [ngClass]="{'active': isActived}">
+    <ng-container *ngIf="storie && storie.items.length > 0">
+        <app-stories-header
+            [storie]="storie"
+            [amountOfStorieSlides]="storie.items"
+            [currentSlide]="this.currentSlide">
+        </app-stories-header>
+        <img *ngFor="let img of storie.items; let i = index;"
+            class="player__image"
+            [ngClass]="{'active--image': currentSlide === i}"
+            [src]="img.url"
+            [alt]="img.name"
+            (click)="pauseStorie()">
+    </ng-container>
+    <app-stories-load *ngIf="activateLoading && storie.items.length < 1 || storie === undefined"></app-stories-load>
+</div>

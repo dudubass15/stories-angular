@@ -1,0 +1,12 @@
+<nav class="header">
+    <div class="header__container">
+        <div class="ellipses">
+            <app-stories-ellipse
+                *ngFor="let slide of amountOfStorieSlides; let i = index"
+                [isFinished]="this.currentSlide > i && this.currentSlide <= amountOfStorieSlides!.length"
+                [isActivated]="this.currentSlide === i ? true : false"
+            ></app-stories-ellipse>
+        </div>
+        <app-stories-info [storie]="storie"></app-stories-info>
+    </div>
+</nav>

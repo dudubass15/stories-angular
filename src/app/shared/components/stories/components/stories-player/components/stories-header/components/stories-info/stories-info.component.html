@@ -1,0 +1,16 @@
+<div class="info">
+    <div class="row">
+        <div class="circle">
+            <img [src]="storie.thumbnail" [alt]="storie.title">
+        </div>
+        <h3 class="name">{{storie.title}} <span>{{storie.date | date: 'dd/MM/yyyy'}}</span></h3>
+    </div>
+    <div class="actions">
+        <button class="btn-share" title="Compartilhar" (click)="share()">
+            <i class="bi bi-share-fill"></i>
+        </button>
+        <button class="btn-close" title="Fechar" (click)="close()">
+            <i class="bi bi-x-lg"></i>
+        </button>
+    </div>
+</div>

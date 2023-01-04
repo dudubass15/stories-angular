@@ -1,0 +1,60 @@
+:host {
+    display: block;
+    font-size: 62.5%;
+    width: 100%;
+    height: 100%;
+
+    .load {
+        display: block;
+        width: 100%;
+        height: 3px;
+        border-radius: 4px;
+        background-color: rgba(255, 255, 255, 0.563);
+        position: relative;
+        overflow: hidden;
+
+        .animate {
+            width: 0%;
+            height: 100%;
+            background-color: #FFF;
+
+            &--active {
+                &::before {
+                    content: '';
+                    width: 100%;
+                    height: 100%;
+                    background-color: #FFF;
+                    border-radius: 4px;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    animation: loading 5800ms linear forwards;
+                    transition: width ease 5800ms;
+                }
+            }
+
+            &--finish {
+                &::before {
+                    content: '';
+                    width: 100%;
+                    height: 100%;
+                    background-color: #FFF;
+                    border-radius: 4px;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                }
+            }
+        }
+    }
+
+    @keyframes loading {
+        0% {
+            width: 0%;
+        }
+
+        100% {
+            width: 100%;
+        }
+    }
+}

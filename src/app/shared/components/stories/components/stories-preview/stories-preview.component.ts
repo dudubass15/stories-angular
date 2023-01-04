@@ -1,4 +1,3 @@
-import { DOCUMENT } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -11,6 +10,7 @@ import {
     SimpleChanges,
     inject,
 } from '@angular/core';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { StoriesGroup } from 'src/app/shared/interfaces/stories-group.interface';
@@ -28,6 +28,28 @@ export const NAVIGATOR = new InjectionToken<Navigator>(
     templateUrl: './stories-preview.component.html',
     styleUrls: ['./stories-preview.component.scss'],
     changeDetection: ChangeDetectionStrategy.Default,
+    animations: [
+        trigger('storiesLoadAnimation', [
+            state('active', style({
+                width: '0%',
+                height: '100%',
+                backgroundColor: 'white',
+                borderRadius: '4px'
+            })),
+            state('success', style({
+                width: '100%',
+                height: '100%',
+                backgroundColor: 'white',
+                borderRadius: '4px'
+            })),
+            transition('active => success', [
+                animate('5800ms')
+            ]),
+            transition('success => active', [
+                animate('5800ms')
+            ])
+        ])
+    ]
 })
 export class StoriesPreviewComponent implements OnChanges {
     /** Array contendo os dados dos stories */
@@ -40,7 +62,7 @@ export class StoriesPreviewComponent implements OnChanges {
 
     /** Habilita ou desabilita o autoplay dos stories */
     @Input()
-    public autoplay: boolean = true;
+    public autoplay: boolean = false;
 
     /** Habilita o loading antes de carregar o conteúdo do stories */
     public loading: boolean = true;
@@ -68,6 +90,8 @@ export class StoriesPreviewComponent implements OnChanges {
         return this.stories[this.currentStorie]?.items[this.currentSlide].link;
     }
 
+    private CLASS__OPEN: string = 'preview--open';
+
     public constructor(
         private render: Renderer2,
         private elRef: ElementRef,
@@ -86,7 +110,7 @@ export class StoriesPreviewComponent implements OnChanges {
     public open(): void {
         const previewEl = this.elRef.nativeElement as HTMLElement;
         const mainEl = previewEl.querySelector('main');
-        this.render.addClass(mainEl, 'open');
+        this.render.addClass(mainEl, this.CLASS__OPEN);
 
         this.getAmountOfStories();
         this.getAmountOfSlide();
@@ -100,7 +124,7 @@ export class StoriesPreviewComponent implements OnChanges {
     public close(): void {
         const previewEl = this.elRef.nativeElement as HTMLElement;
         const mainEl = previewEl.querySelector('main');
-        this.render.removeClass(mainEl, 'open');
+        this.render.removeClass(mainEl, this.CLASS__OPEN);
 
         this.stop(this.timerSetIntervalId);
         this.resetAllProps();
@@ -170,6 +194,20 @@ export class StoriesPreviewComponent implements OnChanges {
             }
         } else {
             this.close();
+        }
+    }
+
+    /** Método responsável por pausar ou dispausar a execução do Stories... */
+    public pauseStories(): void {
+        if (this.autoplay) {
+            console.log('Clicou para pausar o storie...');
+            this.autoplay = false;
+            this.stop(this.timerSetIntervalId);
+        } else {
+            console.log('Voltou a executar o player...');
+            this.autoplay = true;
+            this.autoplayer();
+            this.next();
         }
     }
 
