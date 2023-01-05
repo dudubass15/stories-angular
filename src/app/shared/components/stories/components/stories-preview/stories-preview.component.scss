@@ -77,32 +77,42 @@
 }
 
 @media only screen and (max-width: 768px) {
-    .preview {
-        &__container {
-            grid-template-columns: 1fr;
+    :host {
+        .preview {
+            &__container {
+                grid-template-columns: auto 1fr auto;
 
-            .player {
-                width: 100%;
-                height: 100%;
-                grid-column: 2;
-                grid-row: 1;
+                .next {
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    right: 0;
+                    width: 50%;
+                    z-index: 10;
+                }
+
+                .player {
+                    width: 100%;
+                    height: 100%;
+                    grid-column: 1/3;
+                    grid-row: 1;
+                }
+
+                .previous {
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    width: 50%;
+                    z-index: 10;
+                }
             }
 
-            .btn {
+            &__close {
                 display: none;
             }
-        }
-
-        &__close {
-            display: none;
-        }
-    }
-}
-
-@media only screen and (max-width: 425px) {
-    .preview {
-        &__container {
-            grid-template-columns: 1fr;
         }
     }
 }

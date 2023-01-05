@@ -68,6 +68,7 @@
                 background-color: transparent;
                 outline: none;
                 cursor: pointer;
+                z-index: 50;
 
                 i {
                     font-size: 18px;
@@ -96,6 +97,10 @@
     :host {
         .info {
             .actions {
+                .btn-share {
+                    display: block;
+                }
+
                 .btn-close {
                     display: block;
                 }

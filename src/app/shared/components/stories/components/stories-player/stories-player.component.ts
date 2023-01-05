@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2 } from '@angular/core';
 import { StoriesGroup } from 'src/app/shared/interfaces/stories-group.interface';
 
 @Component({
@@ -21,6 +21,12 @@ export class StoriesPlayerComponent {
 
     @Input()
     public currentSlide: number;
+
+    @Output()
+    public closeChanges: EventEmitter<void> = new EventEmitter<void>();
+
+    @Output()
+    public changeShared: EventEmitter<void> = new EventEmitter<void>();
 
     public constructor() {}
 

@@ -7,6 +7,9 @@
                 [isActivated]="this.currentSlide === i ? true : false"
             ></app-stories-ellipse>
         </div>
-        <app-stories-info [storie]="storie"></app-stories-info>
+        <app-stories-info [storie]="storie"
+                        (changeClose)="closeChanges.emit()"
+                        (changeShared)="changeShared.emit()"
+        ></app-stories-info>
     </div>
 </nav>

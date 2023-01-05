@@ -8,6 +8,8 @@
                 [isActived]="this.currentStorie === i"
                 [wasSeen]="this.currentSlide > i && this.currentSlide <= storie.items!.length"
                 [currentSlide]="this.currentSlide"
+                (closeChanges)="close()"
+                (changeShared)="share()"
             ></app-stories-player>
         </div>
         <button class="btn next" (click)="next()"></button>

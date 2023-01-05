@@ -3,7 +3,9 @@
         <app-stories-header
             [storie]="storie"
             [amountOfStorieSlides]="storie.items"
-            [currentSlide]="this.currentSlide">
+            [currentSlide]="this.currentSlide"
+            (closeChanges)="closeChanges.emit()"
+            (changeShared)="changeShared.emit()">
         </app-stories-header>
         <img *ngFor="let img of storie.items; let i = index;"
             class="player__image"

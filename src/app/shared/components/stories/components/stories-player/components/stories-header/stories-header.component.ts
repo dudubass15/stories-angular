@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { StoriesGroup } from 'src/app/shared/interfaces/stories-group.interface';
 import { StoriesItems } from 'src/app/shared/interfaces/stories-items.interface';
 
@@ -16,4 +16,10 @@ export class StoriesHeaderComponent {
 
     @Input()
     public currentSlide: number;
+
+    @Output()
+    public closeChanges: EventEmitter<void> = new EventEmitter<void>();
+
+    @Output()
+    public changeShared: EventEmitter<void> = new EventEmitter<void>();
 }
