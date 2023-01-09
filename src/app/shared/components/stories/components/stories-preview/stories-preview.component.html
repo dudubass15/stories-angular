@@ -1,4 +1,4 @@
-<main class="preview open" data-aos="zoom-in-up">
+<main class="preview" data-aos="zoom-in-up">
     <div class="preview__container">
         <button class="btn previous" (click)="previous()"></button>
         <div class="player">
@@ -10,6 +10,7 @@
                 [currentSlide]="this.currentSlide"
                 (closeChanges)="close()"
                 (changeShared)="share()"
+                (changePause)="pauseStories()"
             ></app-stories-player>
         </div>
         <button class="btn next" (click)="next()"></button>

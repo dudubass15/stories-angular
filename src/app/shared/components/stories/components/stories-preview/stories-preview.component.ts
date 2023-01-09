@@ -2,7 +2,6 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
-    Inject,
     InjectionToken,
     Input,
     OnChanges,
@@ -200,14 +199,12 @@ export class StoriesPreviewComponent implements OnChanges {
     /** Método responsável por pausar ou dispausar a execução do Stories... */
     public pauseStories(): void {
         if (this.autoplay) {
-            console.log('Clicou para pausar o storie...');
             this.autoplay = false;
             this.stop(this.timerSetIntervalId);
         } else {
-            console.log('Voltou a executar o player...');
             this.autoplay = true;
             this.autoplayer();
-            this.next();
+            // this.next();
         }
     }
 

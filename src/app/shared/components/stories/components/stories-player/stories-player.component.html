@@ -4,6 +4,7 @@
             [storie]="storie"
             [amountOfStorieSlides]="storie.items"
             [currentSlide]="this.currentSlide"
+            [isAnimationPaused]="isPausedEllipse"
             (closeChanges)="closeChanges.emit()"
             (changeShared)="changeShared.emit()">
         </app-stories-header>

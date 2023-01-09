@@ -17,6 +17,9 @@ export class StoriesHeaderComponent {
     @Input()
     public currentSlide: number;
 
+    @Input()
+    public isAnimationPaused: boolean;
+
     @Output()
     public closeChanges: EventEmitter<void> = new EventEmitter<void>();
 

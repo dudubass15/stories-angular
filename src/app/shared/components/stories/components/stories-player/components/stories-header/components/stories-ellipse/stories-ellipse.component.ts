@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
 import { trigger, state, style, animate, transition, keyframes } from '@angular/animations';
 
 @Component({
@@ -29,14 +29,41 @@ import { trigger, state, style, animate, transition, keyframes } from '@angular/
         ])
     ]
 })
-export class StoriesEllipseComponent {
+export class StoriesEllipseComponent implements OnChanges {
     @Input()
     public isActivated: boolean;
 
     @Input()
+    public isPaused: boolean;
+
+    @Input()
     public isFinished: boolean;
 
-    public constructor() {}
+    public constructor(
+        private elRef: ElementRef,
+        private cdRef: ChangeDetectorRef,
+        private render: Renderer2
+    ) {}
 
     public ngOnInit(): void {}
+
+    public ngOnChanges(changes: SimpleChanges): void {
+        if ('isPaused' in changes) {
+            if (changes['isPaused'].currentValue) {
+                this.isPaused = true;
+                this.cdRef.detectChanges();
+                console.log('Pausou a animação...');
+                console.log(changes['isPaused'].currentValue);
+                return;
+            }
+
+            if (!changes['isPaused'].currentValue) {
+                this.isPaused = false;
+                this.cdRef.detectChanges();
+                console.log('Running ...');
+                console.log(changes['isPaused'].currentValue);
+                return;
+            }
+        }
+    }
 }

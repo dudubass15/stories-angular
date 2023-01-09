@@ -5,6 +5,7 @@
                 *ngFor="let slide of amountOfStorieSlides; let i = index"
                 [isFinished]="this.currentSlide > i && this.currentSlide <= amountOfStorieSlides!.length"
                 [isActivated]="this.currentSlide === i ? true : false"
+                [isPaused]="isAnimationPaused"
             ></app-stories-ellipse>
         </div>
         <app-stories-info [storie]="storie"

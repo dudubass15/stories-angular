@@ -33,7 +33,13 @@ export class StoriesComponent implements OnInit {
             if (params.storie) {
                 const storieID: number = parseInt(params.storie);
                 const slideID: number = parseInt(params.slide);
-                this.open(storieID, slideID);
+                const valueExistence = this.checkExistenceOfHistory(storieID, slideID);
+
+                if (valueExistence) {
+                    this.open(storieID, slideID);
+                } else {
+                    this.router.navigate([this.router.url.split('?')[0]]);
+                }
 
                 setTimeout(() => {
                     this.subscription.unsubscribe();
@@ -60,5 +66,31 @@ export class StoriesComponent implements OnInit {
      */
     private getStoriesAll(): StoriesGroup[] {
         return Array.from(this.stories);
+    }
+
+    /** @internal */
+    /**
+     * Pesquisa pelo id do Storie passado
+     */
+    private checkExistenceOfHistory(idStorie: number, idSlide: number): boolean {
+        let result: boolean = false;
+
+        if (this.stories.filter((item) => item.id === idStorie).length > 0) {
+            result = true;
+        } else {
+            result = false;
+        }
+
+        if (result) {
+            this.stories.forEach((storie) => {
+                if (storie.items.filter((item) => item.id === idSlide).length > 0) {
+                    result = true;
+                } else {
+                    result = false;
+                }
+            });
+        }
+
+        return result;
     }
 }

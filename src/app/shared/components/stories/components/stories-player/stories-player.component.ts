@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { StoriesGroup } from 'src/app/shared/interfaces/stories-group.interface';
 
 @Component({
@@ -28,9 +28,16 @@ export class StoriesPlayerComponent {
     @Output()
     public changeShared: EventEmitter<void> = new EventEmitter<void>();
 
-    public constructor() {}
+    @Output()
+    public changePause: EventEmitter<void> = new EventEmitter<void>();
+
+    public isPausedEllipse: boolean = false;
+
+    public constructor(private cdRef: ChangeDetectorRef) {}
 
     public pauseStorie(): void {
-        console.log(this.storie);
+        this.changePause.emit();
+        this.isPausedEllipse = !this.isPausedEllipse ? true : false;
+        this.cdRef.detectChanges();
     }
 }
