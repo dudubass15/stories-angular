@@ -52,16 +52,12 @@ export class StoriesEllipseComponent implements OnChanges {
             if (changes['isPaused'].currentValue) {
                 this.isPaused = true;
                 this.cdRef.detectChanges();
-                console.log('Pausou a animação...');
-                console.log(changes['isPaused'].currentValue);
                 return;
             }
 
             if (!changes['isPaused'].currentValue) {
                 this.isPaused = false;
                 this.cdRef.detectChanges();
-                console.log('Running ...');
-                console.log(changes['isPaused'].currentValue);
                 return;
             }
         }
