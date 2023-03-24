@@ -17,10 +17,10 @@ import { StoriesGroup } from 'src/app/shared/interfaces/stories-group.interface'
 import { StoriesLink } from 'src/app/shared/interfaces/stories-link.interface';
 
 export const NAVIGATOR = new InjectionToken<Navigator>(
-  'An abstraction over window.navigator object',
-  {
-    factory: () => inject(Window).navigator,
-  },
+    'An abstraction over window.navigator object',
+    {
+        factory: () => inject(Window).navigator,
+    }
 );
 
 @Component({

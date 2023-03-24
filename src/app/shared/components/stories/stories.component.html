@@ -3,9 +3,9 @@
         <ul>
             <ng-container *ngFor="let storie of stories; let i = index">
                 <li>
-                    <a (click)="open(i)" [id]="'storie' + i" class="stories__circle">
+                    <a (click)="storieService.open(i)" [id]="'storie' + i" class="stories__circle">
                         <span class="stories__preview">
-                            <img [src]="storie.background" [alt]="storie.title">
+                            <img [src]="storie.album" [alt]="storie.title">
                         </span>
                         <span class="stories__title">{{storie.title}}</span>
                     </a>
@@ -15,4 +15,4 @@
     </div>
 </main>
 
-<app-stories-preview *ngIf="selectedStories.length > 0" [stories]="selectedStories"></app-stories-preview>
+<app-stories-preview *ngIf="storieService.isOpenedPreview" [stories]="this.stories"></app-stories-preview>
